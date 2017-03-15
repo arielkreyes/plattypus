@@ -25,7 +25,12 @@
   </section>
   <section id="tags" class="widget">
     <h3 class="widget-title"> Tags </h3>
-    <?php //tag cloud ?>
+    <?php wp_tag_cloud( array(
+      'smallest' => 1,
+      'largest' => 1,
+      'unit' => 'em',
+      'number' => 20,
+    )) ?>
     <ul>
       <li><a href="#">tag</a></li>
       <li><a href="#">another tag</a></li>

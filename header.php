@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>">
     <?php wp_head(); //this is a hook. required for plugins admin bar to work ?>
   </head>
-<body>
+<body <?php body_class(); ?>>
+  <!-- puts in a class for you to specify which page you are on. -->
 <header role="banner" id="header">
   <div class="header-bar">
     <h1 class="site-title"><a href="<?php echo home_url(); ?>">
