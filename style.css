@@ -236,8 +236,15 @@ a img.aligncenter {
 	width: auto;
 	z-index: 100000; /* Above WP toolbar. */
 }
-
-
+.wrapper {
+  background-color: rgba(255,255,255, .9);
+  padding:.5em;
+}
+.wrapper:after {
+  content: '';
+  display: block;
+  clear: both;
+}
 @media screen and (min-width:600px) {
   nav li {
     display: inline-block;
@@ -246,7 +253,7 @@ a img.aligncenter {
   position:absolute;
   left:0;
   top:100%;
-  background: #eee;
+  background: #947E66;
 }
   nav ul li:hover ul{
     display:block;
@@ -270,8 +277,14 @@ a img.aligncenter {
   }
   /*make the header atller on just the home page*/
   .home #header {
-    padding-top: 50vh;
+    padding-top: 30vh;
     background-color: #eee;
-
+  }
+  .custom-logo{
+    max-width: 80px;
+    height: auto;
+  }
+  .home .custom-logo {
+    max-width: 150px;
   }
 }
