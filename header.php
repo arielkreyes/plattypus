@@ -19,13 +19,11 @@
       <?php bloginfo( 'name' ); ?>
     </a></h1>
     <h2><?php bloginfo( 'description' ); ?></h2>
-    <nav>
-      <ul class="nav">
-        <?php wp_list_pages( array(
-          'title_li' => '', //hide the 'pages' heading
-        ) ); ?>
-      </ul>
-    </nav>
+    <?php wp_nav_menu( array(
+      'theme_location' => 'main_menu',
+      'container' => 'nav', //div, nav or false
+      'menu_class' => 'menu', //ul class="menu"
+    )); ?>
     <?php get_search_form(); ?>
   </div>
 </header>

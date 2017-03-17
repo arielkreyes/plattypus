@@ -16,6 +16,12 @@
       <?php if( is_singular() ){
         //single post, page, attachment, etc
         the_content();
+        wp_link_pages( array(
+          'before'  => '<div class="pagination">
+          Keep Reading:',
+          'after' => '</div>',
+          'pagelink' => '<span>%</span>',
+        ));
       }else{
         the_excerpt();
       }//end of else ?>
@@ -33,6 +39,7 @@
   </article>
   <?php
     } //end of while loop
+    platty_pagination();
     comments_template();
   } //end of if statement
   else{

@@ -51,3 +51,36 @@ function platty_readmore(){
   return ' <a href="' . get_permalink() . '" class="read-more" title="Keep Reading This Post">Read More...</a>';
 }
 add_filter( 'excerpt_more', 'platty_readmore' );
+/**
+  *Create two menu locations. display them with wp_nav_menu() in your templates
+*/
+function platty_menus(){
+  register_nav_menus( array(
+    'main_menu' => 'Main Navigation',
+    'social_menu' => 'Social Media',
+  ));
+}
+add_action( 'init', 'platty_menus');
+
+/*
+ *Helper function to handle pagination. Call in any template file.
+ */
+function platty_pagination(){
+if( ! is_singular() ){
+  //archive pagination
+  if( function_exists('the_posts_pagination')){
+    the_posts_pagination();
+  }else{
+    echo '<div class="pagination">';
+  previous_posts_link( '&larr; Newer Posts');
+  next_posts_link( 'Older Posts &rarr;');
+  echo '</div>';
+  }
+}else{
+  //single pagination
+  echo '<div class="pagination">';
+  previous_post_link( '%link', '&larr; %title'); //one older post
+  next_post_link( '%link', '%title &rarr;'); //one newer post
+  echo '</div>';
+}
+}//end of function
