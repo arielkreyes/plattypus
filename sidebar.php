@@ -1,4 +1,8 @@
 <aside id="sidebar">
+<?php //if there are widgets show them, otherwise do fallback Content
+//don't forget to reigster _sidebar() in functions.php :D
+if( ! dynamic_sidebar('Blog Sidebar' )){ ?>
+
   <section id="categories" class="widget">
     <h3 class="widget-title"> Categories </h3>
     <ul>
@@ -44,5 +48,6 @@
       <li><a href="#">Log out</a> </li>
     </ul>
   </section>
+<?php }//end of if statement of (if no widgets) ?>
 </aside>
 <!-- end #sidebar -->

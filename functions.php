@@ -19,8 +19,8 @@ add_theme_support( 'custom-header', array(
 
 //don't forget the custom_logo() to display it in your theme
 add_theme_support( 'custom-logo', array(
-  'width' => 200,
-  'height'  => 200,
+  'width' => 180,
+  'height'  => 50,
 ));
 
 //better RSS feed links. a must-have if use a blog
@@ -84,3 +84,47 @@ if( ! is_singular() ){
   echo '</div>';
 }
 }//end of function
+
+/*
+ *Register widget Areas ( Dynamic Sidebars )
+ *Call dynamic_sidebar() in your templates to display them
+ */
+function platty_widget_areas(){
+  register_sidebar(array(
+    'name'          => 'Blog Sidebar',
+    'id'            => 'blog-sidebar',
+    'description'   => 'Appears next to blog and archive pages',
+    'before_widget' => '<section id="%S1s" class="widget %2$s"',
+    'after_widget'  => '</section>',
+    'before_title'  => '<h3 class="widgettitle">',
+    'after_title'   => '</h3>',
+  ));
+  register_sidebar(array(
+    'name'          => 'Footer Area',
+    'id'            => 'footer-area',
+    'description'   => 'Appears at the bottom of every page',
+    'before_widget' => '<section id="%S1s" class="widget %2$s"',
+    'before_title'  => '<h3 class="widgettitle">',
+    'after_title'   => '</h3>',
+    'after_widget'  => '</section>',
+  ));
+  register_sidebar(array(
+    'name'          => 'Home Area',
+    'id'            => 'home-area',
+    'description'   => 'Appears in the middle of the home page',
+    'before_widget' => '<section id="%S1s" class="widget %2$s"',
+    'before_title'  => '<h3 class="widgettitle">',
+    'after_title'   => '</h3>',
+    'after_widget'  => '</section>',
+  ));
+  register_sidebar(array(
+    'name'          => 'Page Area',
+    'id'            => 'page-area',
+    'description'   => 'Appears next to static pages :)',
+    'before_widget' => '<section id="%S1s" class="widget %2$s"',
+    'before_title'  => '<h3 class="widgettitle">',
+    'after_title'   => '</h3>',
+    'after_widget'  => '</section>',
+  ));
+}//end of function
+add_action('widgets_init', 'platty_widget_areas');

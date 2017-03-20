@@ -19,5 +19,5 @@
 
 
 </main>
-<?php get_sidebar('page'); ?>
+<?php get_sidebar('home'); //include sidebar-home.php ?>
 <?php get_footer(); ?>

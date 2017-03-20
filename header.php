@@ -12,12 +12,17 @@
   <div class="header-bar">
     <?php
     if(function_exists('the_custom_logo')){
-      the_custom_logo();
-    }
+      if( has_custom_logo() ){
+        the_custom_logo();
+      }else{
+        //show title of website
+        ?>
+            <h1 class="site-title"><a href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a></h1>
+        <?php
+      }//end of else 
+    }//end of function_exists
     ?>
-    <h1 class="site-title"><a href="<?php echo home_url(); ?>">
-      <?php bloginfo( 'name' ); ?>
-    </a></h1>
+
     <h2><?php bloginfo( 'description' ); ?></h2>
     <?php wp_nav_menu( array(
       'theme_location' => 'main_menu',
