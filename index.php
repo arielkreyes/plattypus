@@ -40,7 +40,7 @@
   <?php
     } //end of while loop
     platty_pagination();
-    comments_template();
+    comments_template( '/comments.php', true);
   } //end of if statement
   else{
     echo 'Sorry, no posts to show';
