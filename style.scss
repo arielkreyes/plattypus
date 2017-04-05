@@ -3,7 +3,7 @@
 /* Source SCSS is at http://codepen.io/melissacabral/pen/xOaYgq */
 $text-color:    black;
 $link-color:    darkslategray;
-$accent-color:  dodgerblue;
+$accent-color:  indianred;
 $secondary-color:rgba(black, .1);
 
 $tablet-width:  700px;
@@ -436,7 +436,7 @@ a {
 	}
 }
 .post-type-archive-product .product-grid{
-	@include stretchy-grid(article, '.caption', 300px);
+	@include stretchy-grid(article, '.caption', 200px);
 
 }
 .price{

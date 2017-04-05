@@ -1,7 +1,5 @@
 <?php
 //turn on sleeping features
-
-
 //featured image support:
 add_theme_support('post-thumbnails');
 
@@ -136,3 +134,128 @@ function platty_comments_reply(){
   wp_enqueue_script('comment-reply');
 }
 add_action( 'wp_enqueue_scripts', 'platty_comments_reply' );
+
+/*
+ * Helper function for showing prices of products. Call platty_price() in the loop
+ * @return mixed. displays HTML for the price tag
+ * 'price' is a custom field
+ */
+
+function platty_price(){
+  global $post;
+  $price = get_post_meta( $post->ID, 'price', true);
+  if($price){ ?>
+    <span class="price">
+    <?php echo $price; ?>
+    </span>
+  <?php }//end of if statement
+}//end of platty_price function
+
+/*
+ * Helper function for showing sizes of products. Call platty_size() in the loop
+ * @return mixed. displays HTML for the price tag
+ * 'price' is a custom field
+ */
+function platty_size(){
+  global $post;
+  $size = get_post_meta( $post->ID, 'size', true);
+  if($size){ ?>
+    <span class="size">
+    <?php echo $size; ?>
+    </span>
+  <?php }//end of if statement
+}//end of platty_size function
+
+/**
+ * Customization API additions - custom colors, fonts, layouts, etc....
+ */
+ add_action( 'customize_register', 'platty_customizer');
+ function platty_customizer( $wp_customize ){
+	 //register all sections, settings and controls here:
+   
+   //Second Custom Logo!
+   $wp_customize->add_setting( 'secondary_logo' );
+   
+   $wp_customize->add_control( new WP_Customize_Image_Control($wp_customize, 'secondary_logo_control', array(
+     'label'  =>  'Secondary Logo',
+     'section'  =>  'title_tagline', //built in 'site identity' section
+     'settings' =>  'secondary_logo',
+   )));
+   
+   
+	 //"accent color"
+	 $wp_customize->add_setting( 'accent_color', array(
+		 'default'	=>	'indianred',
+	 ));
+	 //user interface accent color 
+	 $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'accent_color_control', array(
+		 'label'	=>	'Accent Color',
+		 'section'	=>	'colors', //this one is built in!
+		 'settings'	=>	'accent_color', //added above
+	 )));
+   //layout Options!
+   $wp_customize->add_section( 'platty_layout', array(
+     'title'      =>  'Layout',
+     'capability' =>  'edit_theme_options',
+     'priority'   =>  100,
+   ) );
+   
+   $wp_customize->add_setting('header_size', array(
+     'default'  => 'large',
+   ));
+   $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'header_size_control', array(
+     'label'    =>  'Header Height',
+     'section'  =>  'platty_layout',
+     'settings' =>  'header_size',
+     'type'     =>  'radio',
+     'choices'  =>  array(
+        'small'  =>  'Small',
+        'medium' =>  'Medium',
+        'large'  =>  'Large',
+     ),
+     
+   )));
+ }//end platty_customizer
+ /**
+  * Customized CSS - This displays ze customizer changes
+  */
+add_action( 'wp_head', 'platty_custom_css');
+function platty_custom_css(){
+  switch(get_theme_mod('header_size')){
+    case 'small':
+      $size = '20vh';
+    break;
+    case 'medium':
+      $size = '30vh';
+    break;
+    default:
+      $size = '40vh';
+  }//end of switch
+  ?>
+  <style type="text/css">
+  #header .custom-logo-link {
+    background-color: <?php echo get_theme_mod('accent_color'); ?>;
+  }
+  #header {
+    border-color: <?php echo get_theme_mod('accent_color'); ?>;
+  }
+  @media screen and (min-width: 700px){
+    #header{
+      min-height: <?php echo $size; ?>;
+    }
+  }
+  </style>
+  <?php
+}//end of platty_custom_css
+
+/**
+  * Helper function to show custom secondary logo
+  */
+function platty_secondary_logo(){
+  $logo = get_theme_mod( 'secondary_logo'); //wp stores as an attachment post :)
+  if($logo){
+    echo wp_get_attachment_image( $logo, 'thumbnail', false, array(
+      'class' =>  'secondary-logo',
+    ));
+  }
+}//end of platty_secondary_logo
